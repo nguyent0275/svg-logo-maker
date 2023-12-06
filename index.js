@@ -31,9 +31,9 @@ const questions = [
   },
 ];
 
-// creates the svgString from the user's answers and uses it as an argument for the writeFile function. 
+// creates the svgString from the user's answers and uses it as an argument for the writeFile function.
 function writeToFile(fileName, answers) {
-    // variable starts as empty, will be passed a value from the conditional statement
+  // variable starts as empty, will be passed a value from the conditional statement
   let userShape;
   // checks the user input against string values of the predetermined shapes and then passes in the user's shapeColor and shape to the new Shape() class
   // renders a template literal containing the <g> tag, shape text, polygon points, and the shape color.
@@ -60,7 +60,7 @@ function writeToFile(fileName, answers) {
   // adds them all to the empty svg string
   let svgString = `${svgObject.version}${svgObject.shape}${svgObject.textParams}${svgObject.text}`;
 
-  // writes the svgString to a logo.svg which was passed in from the writeToFile function from (index.js:81)
+  // writes the svgString to a logo.svg which was passed in from the writeToFile function
   fs.writeFile("logo.svg", svgString, (err) => {
     if (err) throw err;
   });
@@ -68,32 +68,32 @@ function writeToFile(fileName, answers) {
 
 // stores the inquirer prompt questions within a function
 const promptQuestions = () => {
-    return inquirer
-      .prompt(questions)
-      .then((answers) => {
-        console.log(answers);
-        // checks user input for at least 3 characters, restarts the prompt if it is invalid
-        if (answers.text.length > 3) {
-          console.log("Please enter at least 3 characters");
-          promptQuestions();
-        } else {
-          // passes the fileName and user's answers in as parameters to the writeToFile function (index.js:35)
-          writeToFile("logo.svg", answers);
-        }
-      })
-      .catch((error) => {
-        if (error.isTtyError) {
-          console.log("Prompt couldn't be rendered in the current environment")
-        } else {
-          console.log("Something else went wrong");
-        }
-      });
-  };
-  
-  // creates a initialize function for the app start
-  function init() {
-    promptQuestions();
-  }
-  
-  // runs on start
-  init();
+  return inquirer
+    .prompt(questions)
+    .then((answers) => {
+      console.log(answers);
+      // checks user input for at least 3 characters, restarts the prompt if it is invalid
+      if (answers.text.length > 3) {
+        console.log("Please enter at least 3 characters");
+        promptQuestions();
+      } else {
+        // passes the fileName and user's answers in as parameters to the writeToFile function
+        writeToFile("logo.svg", answers);
+      }
+    })
+    .catch((error) => {
+      if (error.isTtyError) {
+        console.log("Prompt couldn't be rendered in the current environment");
+      } else {
+        console.log("Something else went wrong");
+      }
+    });
+};
+
+// creates a initialize function for the app start
+function init() {
+  promptQuestions();
+}
+
+// runs on start
+init();
