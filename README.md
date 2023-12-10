@@ -27,6 +27,8 @@ A command line interface application that creates logos in SVG format.
 
 ## Usage
 
+Walkthrough Video: https://youtu.be/htFt9D3fUK0
+
 My project is anyone who wants to create a simple logo for their projects or company, without having to spend money on a graphic designer. 
 
 ## Contributing
